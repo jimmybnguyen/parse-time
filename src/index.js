@@ -18,14 +18,14 @@ function getHour(value, config){
 	}
 }
 
-function getMinute(value){
-	if (validMinute(value)){
+function getMinute(value, config){
+	if (validMinute(value, config)){
 		return value * 1
 	}
 }
 
-function getSecond(value){
-	if (validSecond(value)){
+function getSecond(value, config){
+	if (validSecond(value, config)){
 		return value * 1
 	}
 }
@@ -77,7 +77,7 @@ function parseLast(str, partName, config){
 	}
 
 	if (withMeridian){
-		meridian = getMeridian(parts[1])
+		meridian = getMeridian(parts[1], config)
 
 		if (meridian === undefined){
 			result.invalid.push({
@@ -133,7 +133,7 @@ function PARSE(time, config){
 	if (parts.length == 3){
 		//hh:mm:ss am
 		hour   = getHour(parts[0], config)
-		minute = getMinute(parts[1])
+		minute = getMinute(parts[1], config)
 
 		if (hour === undefined){
 			invalids.push({
