@@ -13,25 +13,25 @@ var validSecond   = require('./validSecond')
 var validMeridian = require('./validMeridian')
 
 function getHour(value, config){
-	if (validHour(value, config)){
+	if (validHour(value, assign({}, config, config.hour))){
 		return value * 1
 	}
 }
 
 function getMinute(value, config){
-	if (validMinute(value, config)){
+	if (validMinute(value, assign({}, config, config.minute))){
 		return value * 1
 	}
 }
 
 function getSecond(value, config){
-	if (validSecond(value, config)){
+	if (validSecond(value, assign({}, config, config.second))){
 		return value * 1
 	}
 }
 
-function getMeridian(value){
-	if (validMeridian(value)){
+function getMeridian(value, config){
+	if (validMeridian(value, assign({}, config, config.meridian))){
 		return value
 	}
 }
@@ -54,7 +54,9 @@ function get(name){
 }
 
 function parseLast(str, partName, config){
-	var withMeridian = config && config.meridian
+	config = assign({}, config, config? config[partName]: null)
+
+	var withMeridian = config.meridian
 
 	var parts = str.split(' ').map(trim)
 	var getFn = get(partName)

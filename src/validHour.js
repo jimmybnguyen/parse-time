@@ -1,9 +1,14 @@
 'use strict';
 
 var validNumber = require('./validNumber')
+var assign      = require('object-assign')
 
 module.exports = function validHour(value, config){
-	var meridian = config && config.meridian
+	config = assign({}, config)
+
+	config.twoDigits = config.len == 2
+
+	var meridian = config.meridian
 
 	if (validNumber(value, config)){
 		value *= 1

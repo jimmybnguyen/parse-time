@@ -41,7 +41,7 @@ describe('isValidPart:hour', function(){
     })
 
     it('should invalidate hour without two digits', function(){
-        validHour('3')
+        validHour('3', {len: 2})
             .should
             .equal(false)
     })
@@ -53,7 +53,7 @@ describe('isValidPart:hour', function(){
     })
 
     it('should invalidate hour with twoDigits: true', function(){
-        validHour('3', { twoDigits: true})
+        validHour('3', { len: 2})
             .should
             .equal(false)
     })
@@ -80,19 +80,19 @@ describe('isValidPart:minute', function(){
     })
 
     it('should invalidate minute without two digits', function(){
-        validMinute('3')
+        validMinute('3', {len: 2})
             .should
             .equal(false)
     })
 
     it('should validate minute when twoDigits: false', function(){
-        validMinute('3', { twoDigits: false})
+        validMinute('3', { len: 1})
             .should
             .equal(true)
     })
 
     it('should invalidate minute with twoDigits: true', function(){
-        validMinute('3', { twoDigits: true})
+        validMinute('3', { len: 2})
             .should
             .equal(false)
     })
@@ -119,19 +119,19 @@ describe('isValidPart:minute', function(){
     })
 
     it('should invalidate second without two digits', function(){
-        validSecond('3')
+        validSecond('3', {len: 2})
             .should
             .equal(false)
     })
 
     it('should validate second when twoDigits: false', function(){
-        validSecond('3', { twoDigits: false})
+        validSecond('3', { len: 1})
             .should
             .equal(true)
     })
 
     it('should invalidate second with twoDigits: true', function(){
-        validSecond('3', { twoDigits: true})
+        validSecond('3', { len: 2})
             .should
             .equal(false)
     })
@@ -243,13 +243,13 @@ describe('isValidTime', function(){
             hour: 12,
             minute: 45,
             second: '6'
-        }).should
-        .equal(false)//since we require twoDigits on strings by default
+        }, {len: 2}).should
+        .equal(false)
 
     })
 
     it('should invalidate 15:00 am', function(){
-        debugger
+
         validTime({
             hour: 15,
             minute: 0,
