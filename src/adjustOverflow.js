@@ -18,7 +18,7 @@ function overflowHour(values, name, value, config){
 	}
 
 	var overflowHourToMeridian = !config || config.overflowHourToMeridian !== false
-	var meridian = values.meridian || config && config.meridian
+	var meridian = values.meridian || config && config.meridian === true
 	var limit    = meridian? 12: 23
 	var plusOne  = meridian? 12: 24
 
